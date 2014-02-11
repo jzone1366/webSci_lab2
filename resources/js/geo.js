@@ -1,42 +1,27 @@
 $(document).ready(getWeather());
+
 function getWeather() {
 	var apikey = 'bf5483dbc2ddf7ad2be4c320ef75b582';
-	var url = 'https://api.forecast.io/forecast/';
+	var weatherUrl = 'https://api.forecast.io/forecast/';
+	var mapUrl = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=';
+	var mapEnd = '&sensor=true';
 	var lat = '42.6957503';
 	var lon = '-73.8966634';
 	var data;
 
-	$.getJSON(url + apikey + "/" + lat + "," + lon + "?callback=?", function(data) {
-		console.log(data.currently.temperature);
-		console.log(data.currently.summary);
-		console.log(data.currently.icon);
+	
+	$.getJSON(mapUrl + lat + "," + lon + mapEnd, function(data) {
+		$('#city').html(data.results[0].address_components[2].short_name);
+		//console.log(data.results[0].address_components[2].short_name);
+	})
+	$.getJSON(weatherUrl + apikey + "/" + lat + "," + lon + "?callback=?", function(data) {
+		//console.log(data.currently.temperature);
+		//console.log(data.currently.summary);
 		var skycons = new Skycons({"color" : "black"});
 		$('#temp').html(data.currently.temperature);
 		$('#cond').html(data.currently.summary);
-		switch (data.currently.icon) {
-			case "partly-cloudy-day":
-				skycons.add("img", Skycons.PARTLY_CLOUDY_DAY);
-				break;
-			case "clear-day":
-				break;
-			case "clear-night":
-				break;
-			case "rain":
-				break;
-			case "snow":
-				break;
-			case "sleet":
-				break;
-			case "wind":
-				break;
-			case "fog":
-				break;
-			case "cloudy":
-				break;
-
-		}
+		skycons.set("img", data.currently.icon);
 		skycons.play();
-		//$('#img').(data.currently.icon);
 	}); 
 }
 /*if(navigator.geolocation) {
