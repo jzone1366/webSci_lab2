@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!-- fonts from Google Fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Fauna+One|New+Rocker|Peralta|Annie+Use+Your+Telescope' rel='stylesheet' type='text/css'>
+		<!-- framework css -->
+		<link type="text/css" rel="stylesheet" href="resources/css/groundwork.css">
+		<!--[if lte IE 9]>
+			<link type="text/css" rel="stylesheet" href="resources/css/groundwork-core.css">
+			<link type="text/css" rel="stylesheet" href="resources/css/groundwork-type.css">
+			<link type="text/css" rel="stylesheet" href="resources/css/groundwork-ui.css">
+			<link type="text/css" rel="stylesheet" href="resources/css/groundwork-anim.css">
+			<link type="text/css" rel="stylesheet" href="resources/css/groundwork-ie.css">
+		<![endif]-->
 		<link rel="stylesheet" type="text/css" href="resources/css/weather.css">
 	</head>
 	<body>
-		<div id="weatherWidget">
-			<div id="city"></div>
-			<div id="temp"></div>
-			<div id="cond"></div>
-			<canvas id="img" width="64" height="64"></canvas>
+		<div id="cur-weather">
+			<div class="row">
+				<div class = "three fifths centered">
+					<div class="one half">
+						<canvas id="skycon-img" width="128" height="128"></canvas>
+					</div>
+					<div class="one half">
+						<p id="city"></p>
+						<p id="temp"></p>
+						<p id="cond"></p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 	<!-- jQuery -->
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript" src="resources/js/geo.js"></script>
-		<script type="text/javascript" src="resources/js/skycons.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="resources/js/geo.js"></script>
+	<script type="text/javascript" src="resources/js/skycons.js"></script>
+	<!--Groundwork JS -->
+	<script type="text/javascript" src="resources/js/groundwork.all.js"></script>
+	<!-- Modernizr -->
+	<script src="resources/js/modernizr-2.6.2.min.js"></script>
 </html>
