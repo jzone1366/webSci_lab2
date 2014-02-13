@@ -15,16 +15,17 @@
 		<link rel="stylesheet" type="text/css" href="resources/css/weather.css">
 	</head>
 	<body>
-		<div id="cur-weather">
-			<div class="row">
-				<div class = "three fifths centered">
-					<div class="one half">
-						<canvas id="skycon-img" width="128" height="128"></canvas>
+		<div class="row">
+			<div class="two fifths centered">
+				<div class="row"id="cur_weather">
+					<div class="one third" id="temp_icon">
+						<canvas id="skycon-img" width="64" height="64"></canvas>
+						<div id="temp"></div>
 					</div>
-					<div class="one half">
-						<p id="city"></p>
-						<p id="temp"></p>
-						<p id="cond"></p>
+					<div class="two thirds" id="summ">
+						<div id="city"></div>
+						<div id="max_min"></div>
+						<div id="cond"></div>
 					</div>
 				</div>
 			</div>

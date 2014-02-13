@@ -68,7 +68,7 @@ function getWeather(lat, lon) {
 	 * @param data JSON object of the address based on the current Lat, Lon Coordinates. 
 	 */
 	$.getJSON(mapUrl + lat + "," + lon + mapEnd, function(data) {
-		$('#city').html(data.results[0].address_components[2].short_name);
+		$('#city').html(data.results[0].address_components[2].short_name + "<i class='icon-plus-sign more'></i>");
 	})
 
 	/**
@@ -77,7 +77,8 @@ function getWeather(lat, lon) {
 	 */
 	$.getJSON(weatherUrl + apikey + "/" + lat + "," + lon + "?callback=?", function(data) {
 		var skycons = new Skycons({"color" : "black"});
-		$('#temp').html(data.currently.temperature + "&deg");
+		$('#temp').html(Math.round(data.currently.temperature) + "&#8457;");
+		$('#max_min').html(Math.round(data.daily.data[0].temperatureMin) + "&#8457; | " + Math.round(data.daily.data[0].temperatureMax) + "&#8457;");
 		$('#cond').html(data.currently.summary);
 		skycons.set("skycon-img", data.currently.icon);
 		skycons.play();
