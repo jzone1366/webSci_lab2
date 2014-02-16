@@ -2,11 +2,11 @@
 	font-family: 'Ceviche One', cursive;
 	margin-top: 25px;
 	padding-top: 5px;
-	
+	padding-bottom: 5px;
 	border-radius: 10px;
 	box-shadow:1px 1px 10px 2px grey;
 }
-#city {
+#city{
 	font-weight: 800;
 	font-size: 30px;
 }
@@ -22,7 +22,8 @@
 #summ, #temp_icon{
 	text-align: center;
 }
-.more {
-	padding-left: 5px;
+#more {
 	font-size: 20px;
+	padding-left: 5px;
+	cursor: pointer;
 }

@@ -1,6 +1,6 @@
-$(document).ready(function() { 
-	var lat = '42.6957503';
-	var lon = '-73.8966634';
+var lat = '42.6957503';
+var lon = '-73.8966634';
+$(document).ready(function() {
 	
 	/**
 	 * Check if the browser supports Geolocation. 
@@ -21,24 +21,22 @@ $(document).ready(function() {
 		console.log("Geolocation is not supported by this browser");
 		getWeather(lat, lon);
 	}
-	/**
-	 * Check if there was an error when trying to retrieve the current users position from the HTML5 Geolocation API.
-	 * If there is an error then pass the default lat and lon to the getWeather function. 
-	 * @param  Array error list of errors that will be returned. 
-	 * @return error to write to the console for debugging. 
-	 */
-	function getError(error) {
-		var errors = {
-			1: 'Permission denied',
-			2: 'Position unavailable',
-			3: 'Request timeout'
-		};
-		console.log("Error: " + errors[error.code])
-		getWeather(lat, lon);
-
-	}
 });
-
+/**
+ * Check if there was an error when trying to retrieve the current users position from the HTML5 Geolocation API.
+ * If there is an error then pass the default lat and lon to the getWeather function. 
+ * @param  Array error list of errors that will be returned. 
+ * @return error to write to the console for debugging. 
+ */
+function getError(error) {
+	var errors = {
+		1: 'Permission denied',
+		2: 'Position unavailable',
+		3: 'Request timeout'
+	};
+	console.log("Error: " + errors[error.code])
+	getWeather(lat, lon);
+}
 /**
  * Attains the lat, lon coords from the HTML5 Geolocation API if the browser supports it. 
  * @param  position current Position data from the Geolocation API.
@@ -68,7 +66,7 @@ function getWeather(lat, lon) {
 	 * @param data JSON object of the address based on the current Lat, Lon Coordinates. 
 	 */
 	$.getJSON(mapUrl + lat + "," + lon + mapEnd, function(data) {
-		$('#city').html(data.results[0].address_components[2].short_name + "<i class='icon-plus-sign more'></i>");
+		$('#city').html(data.results[0].address_components[2].short_name + "<i id='more' class='icon-plus-sign'></i>");
 	})
 
 	/**
@@ -82,5 +80,20 @@ function getWeather(lat, lon) {
 		$('#cond').html(data.currently.summary);
 		skycons.set("skycon-img", data.currently.icon);
 		skycons.play();
+
+		/**
+		 * Toggle the information that is in the two divs below the city name.
+		 * Toggle the icon that is used to display more information or less information. 
+		 */
+		$("#more").toggle(function() {
+			$('#max_min').html("Humidity: " + Math.round(data.currently.humidity*100) + "%");
+			$('#cond').html("Wind Speed: " + Math.round(data.currently.windSpeed) + "mph");
+			$("#more").attr('class', 'icon-minus-sign');
+		},
+		function() {
+			$('#max_min').html(Math.round(data.daily.data[0].temperatureMin) + "&#8457; | " + Math.round(data.daily.data[0].temperatureMax) + "&#8457;");
+			$('#cond').html(data.currently.summary);
+			$('#more').attr('class', 'icon-plus-sign');
+		});
 	});
 }
